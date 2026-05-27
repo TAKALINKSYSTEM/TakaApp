@@ -1,0 +1,1525 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>TERECSO — The Environmental Conservation &amp; Recycling Cooperative</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+  tailwind.config = {
+    theme: {
+      extend: {
+        fontFamily: { sans: ["'Nunito'", "ui-sans-serif", "system-ui", "sans-serif"] },
+        colors: {
+          duo: {
+            green:   "#58CC02",
+            green2:  "#46a302",
+            green3:  "#2f6b00",
+            forest:  "#1f4d12",
+            mint:    "#D7FFB8",
+            mint2:   "#E8FFD2",
+            cream:   "#FFFCEF",
+            sand:    "#F7F2DE",
+            blue:    "#1CB0F6",
+            yellow:  "#FFC800",
+            red:     "#FF4B4B",
+            ink:     "#3C3C3C",
+            ink2:    "#777777",
+            line:    "#E5E5E5",
+          },
+        },
+        boxShadow: {
+          duo:    "0 4px 0 0 #46a302",
+          duoSm:  "0 3px 0 0 #46a302",
+          duoLg:  "0 6px 0 0 #46a302",
+          duoDk:  "0 4px 0 0 #1f4d12",
+          duoWh:  "0 4px 0 0 rgba(0,0,0,0.15)",
+          card:   "0 2px 0 0 #E5E5E5",
+          cardLg: "0 4px 0 0 #E5E5E5",
+          cardSoft: "0 10px 30px -10px rgba(31,77,18,0.15)",
+        },
+      },
+    },
+  };
+</script>
+<style>
+  html, body, #root {
+    height: 100%; margin: 0;
+    font-family: 'Nunito', ui-sans-serif, system-ui, sans-serif;
+    background: #FFFCEF; color: #3C3C3C;
+    -webkit-font-smoothing: antialiased;
+  }
+  body { font-feature-settings: "ss01" on, "cv11" on; }
+
+  /* Duo press effect */
+  .duo-btn {
+    position: relative;
+    display: inline-flex; align-items: center; justify-content: center;
+    gap: 0.5rem;
+    font-weight: 800;
+    border-radius: 16px;
+    padding: 14px 22px;
+    color: #fff;
+    background: #58CC02;
+    border: 2px solid #58CC02;
+    box-shadow: 0 4px 0 0 #46a302;
+    transition: transform 80ms ease, box-shadow 80ms ease, background 120ms ease;
+    cursor: pointer;
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+    font-size: 14px;
+    user-select: none;
+  }
+  .duo-btn:hover { background: #61D904; }
+  .duo-btn:active { transform: translateY(4px); box-shadow: 0 0 0 0 #46a302; }
+  .duo-btn.sm { padding: 10px 16px; font-size: 12px; border-radius: 12px; box-shadow: 0 3px 0 0 #46a302; }
+  .duo-btn.sm:active { transform: translateY(3px); box-shadow: 0 0 0 0 #46a302; }
+  .duo-btn.lg { padding: 18px 28px; font-size: 16px; box-shadow: 0 6px 0 0 #46a302; }
+  .duo-btn.lg:active { transform: translateY(6px); box-shadow: 0 0 0 0 #46a302; }
+
+  .duo-btn.ghost {
+    background: #fff; color: #58CC02; border-color: #E5E5E5;
+    box-shadow: 0 4px 0 0 #E5E5E5;
+  }
+  .duo-btn.ghost:hover { background: #FAFAFA; }
+  .duo-btn.ghost:active { box-shadow: 0 0 0 0 #E5E5E5; }
+
+  .duo-btn.dark {
+    background: #1f4d12; border-color: #1f4d12; box-shadow: 0 4px 0 0 #0e2807;
+  }
+  .duo-btn.dark:hover { background: #2a6418; }
+  .duo-btn.dark:active { box-shadow: 0 0 0 0 #0e2807; }
+
+  .duo-btn.yellow {
+    background: #FFC800; border-color: #FFC800; box-shadow: 0 4px 0 0 #D5A500; color: #3C3C3C;
+  }
+  .duo-btn.yellow:hover { background: #FFD32A; }
+  .duo-btn.yellow:active { box-shadow: 0 0 0 0 #D5A500; }
+
+  .duo-card {
+    background: #fff;
+    border: 2px solid #E5E5E5;
+    border-radius: 22px;
+    box-shadow: 0 4px 0 0 #E5E5E5;
+  }
+  .duo-card.tinted {
+    background: #FFFCEF;
+  }
+
+  .chip {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: #fff; border: 2px solid #E5E5E5;
+    border-radius: 999px; padding: 4px 12px;
+    font-size: 12px; font-weight: 700; color: #3C3C3C;
+    box-shadow: 0 2px 0 0 #E5E5E5;
+  }
+  .chip.green { color: #2f6b00; border-color: #B7E893; background: #E8FFD2; box-shadow: 0 2px 0 0 #B7E893; }
+  .chip.yellow { color: #8a6900; border-color: #FFE08A; background: #FFF6D6; box-shadow: 0 2px 0 0 #FFE08A; }
+  .chip.blue   { color: #0b6ea0; border-color: #A7D8F4; background: #E1F3FF; box-shadow: 0 2px 0 0 #A7D8F4; }
+
+  /* Animations */
+  @keyframes floatY { 0%,100% { transform: translateY(0) } 50% { transform: translateY(-12px) } }
+  @keyframes floatY2 { 0%,100% { transform: translateY(0) translateX(0) } 50% { transform: translateY(10px) translateX(8px) } }
+  @keyframes spinSlow { to { transform: rotate(360deg) } }
+  @keyframes pulseGlow {
+    0%,100% { opacity: 0.55; transform: scale(1) }
+    50% { opacity: 0.95; transform: scale(1.06) }
+  }
+  @keyframes wiggle {
+    0%,100% { transform: rotate(0deg) }
+    25% { transform: rotate(3deg) }
+    75% { transform: rotate(-3deg) }
+  }
+  @keyframes drift {
+    0% { transform: translate3d(0,0,0) }
+    50% { transform: translate3d(20px,-10px,0) }
+    100% { transform: translate3d(0,0,0) }
+  }
+  @keyframes marquee {
+    from { transform: translateX(0) }
+    to { transform: translateX(-50%) }
+  }
+  .float-1 { animation: floatY 6.5s ease-in-out infinite; }
+  .float-2 { animation: floatY2 9s ease-in-out infinite; }
+  .spin-slow { animation: spinSlow 60s linear infinite; }
+  .pulse-glow { animation: pulseGlow 5s ease-in-out infinite; }
+  .wiggle:hover { animation: wiggle 0.5s ease-in-out; }
+  .drift { animation: drift 14s ease-in-out infinite; }
+  .marquee-track { animation: marquee 40s linear infinite; }
+
+  /* Reveal */
+  .reveal { opacity: 0; transform: translateY(16px); transition: opacity .8s ease, transform .8s ease; }
+  .reveal.in { opacity: 1; transform: translateY(0); }
+
+  /* Hero leaf gradient (fallback when video can't load) */
+  .leaf-bg {
+    background:
+      radial-gradient(ellipse 80% 60% at 18% 30%, rgba(215,255,184,0.7), transparent 70%),
+      radial-gradient(ellipse 70% 60% at 80% 22%, rgba(88,204,2,0.55), transparent 65%),
+      radial-gradient(ellipse 90% 70% at 50% 100%, rgba(31,77,18,0.85), transparent 60%),
+      linear-gradient(135deg, #1f4d12 0%, #2f6b00 35%, #46a302 65%, #58CC02 100%);
+  }
+  .ph-stripes-dark {
+    background-image: repeating-linear-gradient(135deg, rgba(255,255,255,0.07) 0 8px, rgba(255,255,255,0.02) 8px 16px);
+  }
+
+  /* Dotted texture */
+  .dot-bg {
+    background-image: radial-gradient(circle, #B7E893 1.2px, transparent 1.4px);
+    background-size: 22px 22px;
+  }
+
+  /* Particle */
+  .particle {
+    position: absolute; border-radius: 9999px;
+    background: rgba(255,255,255,0.6); filter: blur(0.5px);
+    animation: floatY 7s ease-in-out infinite;
+  }
+  .leaf-particle {
+    position: absolute; width: 22px; height: 22px;
+    color: rgba(255,255,255,0.55);
+    animation: drift 14s ease-in-out infinite;
+  }
+
+  /* Phone preview */
+  .phone {
+    position: relative;
+    width: 280px; height: 560px;
+    background: #1f4d12;
+    border-radius: 44px; padding: 10px;
+    box-shadow: 0 24px 60px -20px rgba(31,77,18,0.5), 0 10px 0 0 #0e2807;
+  }
+  .phone-screen {
+    width: 100%; height: 100%;
+    background: #FFFCEF;
+    border-radius: 34px; overflow: hidden;
+    position: relative;
+  }
+  .phone-notch {
+    position: absolute; top: 14px; left: 50%; transform: translateX(-50%);
+    width: 100px; height: 22px; background: #1f4d12; border-radius: 14px; z-index: 2;
+  }
+
+  .no-scrollbar::-webkit-scrollbar { display: none; }
+  .no-scrollbar { scrollbar-width: none; }
+
+  /* ============== PRINT STYLES ============== */
+  @page {
+    size: A4 portrait;
+    margin: 0;
+  }
+  @media print {
+    html, body, #root {
+      background: #FFFCEF !important;
+      -webkit-print-color-adjust: exact !important;
+      print-color-adjust: exact !important;
+    }
+    * {
+      -webkit-print-color-adjust: exact !important;
+      print-color-adjust: exact !important;
+      animation: none !important;
+      transition: none !important;
+    }
+    /* Hide things that don't belong in print */
+    nav.fixed, nav[class*="fixed"], .print-hide,
+    [aria-label="Open menu"], [aria-label="Close menu"],
+    .marquee-track { transform: none !important; }
+
+    /* Drawer + overlays are fixed -- hide */
+    div.lg\:hidden.fixed { display: none !important; }
+
+    /* Page break per <section> */
+    section {
+      break-before: page;
+      page-break-before: always;
+      break-inside: avoid;
+      min-height: 0 !important;
+      height: auto !important;
+      padding-top: 28px !important;
+      padding-bottom: 28px !important;
+      overflow: visible !important;
+    }
+    section:first-of-type {
+      break-before: auto;
+      page-break-before: avoid;
+    }
+    main > section, main > footer { width: 100%; }
+    footer {
+      break-before: page;
+      page-break-before: always;
+      break-inside: avoid;
+      padding-top: 28px !important;
+      padding-bottom: 18px !important;
+    }
+
+    /* Hero -- size it to a page, keep the bg gradient visible */
+    section:first-of-type {
+      min-height: auto !important;
+      height: auto !important;
+      padding-top: 24px !important;
+      padding-bottom: 24px !important;
+    }
+    /* Make any absolute-positioned hero bg behave */
+    section .leaf-bg { background-attachment: scroll !important; }
+
+    /* Don't let cards break across pages */
+    .duo-card, .duo-btn, .chip, .phone { break-inside: avoid; page-break-inside: avoid; }
+
+    /* Disable sticky/fixed elements that mess with print flow */
+    .fixed { position: static !important; }
+
+    /* Tone down massive bg blurs (they bloat PDFs) */
+    [style*="filter: blur"] { filter: none !important; }
+
+    /* Replace pure-decorative orbit rings with nothing */
+    .spin-slow { display: none !important; }
+
+    /* Hide hero floating mascot to avoid overlap on a static page */
+    .float-1, .float-2, .pulse-glow { animation: none !important; }
+
+    /* Slightly shrink huge type so a hero fits a page */
+    section:first-of-type h1 { font-size: 56px !important; line-height: 1 !important; }
+
+    /* Ensure the hero readable on print bg */
+    section:first-of-type { background: #1f4d12 !important; color: #fff !important; }
+    section:first-of-type .leaf-bg { display: block !important; }
+    section:first-of-type video, section:first-of-type canvas { display: none !important; }
+
+    /* Marquee: hide duplicated tail */
+    .marquee-track > *:nth-child(n+7) { display: none !important; }
+  }
+</style>
+</head>
+<body>
+<div id="root"></div>
+
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+
+<script type="text/babel" data-presets="react">
+const { useState, useEffect, useRef } = React;
+
+/* ---------- Icons (inline lucide-style) ---------- */
+const Icon = ({ name, className = "w-4 h-4", strokeWidth = 2.2 }) => {
+  const common = {
+    xmlns:"http://www.w3.org/2000/svg", viewBox:"0 0 24 24", fill:"none",
+    stroke:"currentColor", strokeWidth, strokeLinecap:"round", strokeLinejoin:"round",
+    className,
+  };
+  const paths = {
+    Menu: <><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></>,
+    X: <><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></>,
+    Play: <polygon points="6 4 20 12 6 20 6 4"/>,
+    ArrowRight: <><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></>,
+    ArrowUpRight: <><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></>,
+    Recycle: <><path d="M7 19H4.815a1.83 1.83 0 0 1-1.57-.881 1.785 1.785 0 0 1-.004-1.784L7.196 9.5"/><path d="M11 19h8.203a1.83 1.83 0 0 0 1.556-.89 1.784 1.784 0 0 0 0-1.775l-1.226-2.12"/><path d="m14 16-3 3 3 3"/><path d="M8.293 13.596 4.196 9.5 9.5 4.196"/><path d="m13.378 9.633 4.096 4.097-4.096 4.096"/><path d="m9.5 4.196 1.227-2.122a1.785 1.785 0 0 1 3.092 0l2.13 3.696"/></>,
+    Leaf: <><path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4 19.4 2 20 8 19 13 13 17a8 8 0 0 1-2 3"/><path d="M2 22c0-3 4-7 9-7"/></>,
+    Sparkles: <><path d="M12 3l1.8 4.7L18.5 9.5l-4.7 1.8L12 16l-1.8-4.7L5.5 9.5l4.7-1.8L12 3z"/><path d="M19 14l.9 2.1 2.1.9-2.1.9L19 20l-.9-2.1-2.1-.9 2.1-.9L19 14z"/></>,
+    Users: <><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></>,
+    Trash: <><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/><path d="M10 11v6"/><path d="M14 11v6"/><path d="M9 6V4a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v2"/></>,
+    Factory: <><path d="M2 20h20"/><path d="M5 20V8l5 4V8l5 4V4h4v16"/><path d="M9 20v-4"/><path d="M14 20v-4"/></>,
+    HeartHandshake: <><path d="M11 17l-5-5a3.5 3.5 0 1 1 5-5l1 1 1-1a3.5 3.5 0 1 1 5 5"/><path d="m11 17 2 2a1 1 0 0 0 1.41 0l5.59-5.59a2 2 0 0 0 0-2.82l-1.59-1.59"/></>,
+    Truck: <><path d="M1 3h15v13H1z"/><path d="M16 8h4l3 3v5h-7z"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></>,
+    Store: <><path d="M3 9l1.5-6h15L21 9"/><path d="M3 9v11h18V9"/><path d="M3 9a3 3 0 0 0 6 0 3 3 0 0 0 6 0 3 3 0 0 0 6 0"/></>,
+    Book: <><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></>,
+    Coins: <><circle cx="8" cy="8" r="6"/><path d="M18.09 10.37A6 6 0 1 1 10.34 18"/><path d="M7 6h1v4"/><path d="m16.71 13.88.7.71-2.82 2.82"/></>,
+    Phone: <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/>,
+    Mail: <><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 5L2 7"/></>,
+    MapPin: <><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></>,
+    Check: <polyline points="20 6 9 17 4 12"/>,
+    Bolt: <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/>,
+    Globe: <><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></>,
+    Tree: <><path d="M10 10v.2A3 3 0 0 1 8.9 16v0H5v0h0a3 3 0 0 1-1-5.8V10a3 3 0 0 1 6 0Z"/><path d="M7 16v6"/><path d="M13 19v3"/><path d="M12 19h8.3a1 1 0 0 0 .7-1.7L18 14h.3a1 1 0 0 0 .7-1.7L16 9h.2a1 1 0 0 0 .8-1.7L13 3l-1.4 1.7"/></>,
+    Star: <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>,
+    Instagram: <><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></>,
+    Facebook: <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/>,
+    Linkedin: <><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></>,
+    Twitter: <path d="M22 4.01a8.8 8.8 0 0 1-2.6.71 4.48 4.48 0 0 0 2-2.48 8.93 8.93 0 0 1-2.86 1.07 4.5 4.5 0 0 0-7.66 4.1A12.77 12.77 0 0 1 3 3.16a4.5 4.5 0 0 0 1.39 6 4.46 4.46 0 0 1-2-.55v.06a4.5 4.5 0 0 0 3.6 4.4 4.5 4.5 0 0 1-2 .08 4.5 4.5 0 0 0 4.2 3.1A9 9 0 0 1 2 19a12.74 12.74 0 0 0 6.9 2c8.28 0 12.8-6.86 12.8-12.8v-.58A9 9 0 0 0 22 4.01z"/>,
+    AlertTriangle: <><path d="M10.29 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></>,
+    Shield: <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>,
+    LightBulb: <><path d="M9 18h6"/><path d="M10 22h4"/><path d="M12 2a7 7 0 0 0-4 12.74V17h8v-2.26A7 7 0 0 0 12 2z"/></>,
+  };
+  return <svg {...common}>{paths[name]}</svg>;
+};
+
+/* ---------- Boomerang Video Bg (with gradient + leaf-particle fallback) ---------- */
+const BG_VIDEO = "https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260511_131941_d136af49-e243-493a-be14-6ff3f24e09e6.mp4";
+
+function BoomerangVideoBg({ src, className }) {
+  const videoRef = useRef(null);
+  const displayCanvasRef = useRef(null);
+  const [framesReady, setFramesReady] = useState(false);
+  const [fallback, setFallback] = useState(false);
+  const framesRef = useRef([]);
+
+  useEffect(() => {
+    const video = videoRef.current;
+    if (!video) return;
+    const frames = [];
+    let capturing = true;
+    let lastTime = -1;
+    const MAX_WIDTH = 960;
+
+    const captureFrame = () => {
+      if (!capturing || video.readyState < 2) return;
+      if (video.currentTime === lastTime) return;
+      lastTime = video.currentTime;
+      const vw = video.videoWidth, vh = video.videoHeight;
+      if (!vw || !vh) return;
+      const scale = Math.min(1, MAX_WIDTH / vw);
+      const w = Math.round(vw * scale), h = Math.round(vh * scale);
+      const canvas = document.createElement("canvas");
+      canvas.width = w; canvas.height = h;
+      const ctx = canvas.getContext("2d");
+      if (!ctx) return;
+      try { ctx.drawImage(video, 0, 0, w, h); frames.push(canvas); }
+      catch(e) { capturing = false; setFallback(true); }
+    };
+
+    const hasVFC = typeof video.requestVideoFrameCallback === "function";
+    let rafId = 0;
+    const rafLoop = () => { captureFrame(); if (capturing) rafId = requestAnimationFrame(rafLoop); };
+    const vfcLoop = () => { captureFrame(); if (capturing && video.requestVideoFrameCallback) video.requestVideoFrameCallback(vfcLoop); };
+    const onEnded = () => { capturing = false; if (frames.length) { framesRef.current = frames; setFramesReady(true); } };
+    const onError = () => setFallback(true);
+    const onLoaded = () => {
+      video.play().catch(() => setFallback(true));
+      if (hasVFC) video.requestVideoFrameCallback(vfcLoop); else rafId = requestAnimationFrame(rafLoop);
+    };
+    const timeout = setTimeout(() => { if (!framesReady && video.readyState < 2) setFallback(true); }, 4500);
+
+    video.addEventListener("loadedmetadata", onLoaded);
+    video.addEventListener("ended", onEnded);
+    video.addEventListener("error", onError);
+    if (video.readyState >= 1) onLoaded();
+    return () => {
+      capturing = false;
+      cancelAnimationFrame(rafId); clearTimeout(timeout);
+      video.removeEventListener("loadedmetadata", onLoaded);
+      video.removeEventListener("ended", onEnded);
+      video.removeEventListener("error", onError);
+    };
+  }, [src]);
+
+  useEffect(() => {
+    if (!framesReady) return;
+    const canvas = displayCanvasRef.current; if (!canvas) return;
+    const ctx = canvas.getContext("2d"); if (!ctx) return;
+    const frames = framesRef.current; if (!frames.length) return;
+    const first = frames[0]; canvas.width = first.width; canvas.height = first.height;
+    let index = 0, direction = 1, last = performance.now();
+    const interval = 1000 / 30;
+    let rafId = 0;
+    const render = (now) => {
+      if (now - last >= interval) {
+        last = now; ctx.drawImage(frames[index], 0, 0);
+        index += direction;
+        if (index >= frames.length - 1) { index = frames.length - 1; direction = -1; }
+        else if (index <= 0) { index = 0; direction = 1; }
+      }
+      rafId = requestAnimationFrame(render);
+    };
+    rafId = requestAnimationFrame(render);
+    return () => cancelAnimationFrame(rafId);
+  }, [framesReady]);
+
+  return (
+    <div className={className ?? "absolute inset-0 w-full h-full"}>
+      <div className={`absolute inset-0 leaf-bg ${fallback || !framesReady ? "block" : "hidden"}`}>
+        <div className="absolute -left-24 top-24 w-[420px] h-[420px] rounded-full pulse-glow"
+          style={{ background: "radial-gradient(circle, rgba(215,255,184,0.6), transparent 65%)", filter: "blur(40px)" }} />
+        <div className="absolute right-[-80px] top-1/3 w-[520px] h-[520px] rounded-full float-1"
+          style={{ background: "radial-gradient(circle, rgba(88,204,2,0.55), transparent 65%)", filter: "blur(50px)" }} />
+        <div className="absolute left-1/3 bottom-[-100px] w-[600px] h-[600px] rounded-full float-2"
+          style={{ background: "radial-gradient(circle, rgba(31,77,18,0.7), transparent 70%)", filter: "blur(60px)" }} />
+        {[...Array(18)].map((_, i) => (
+          <span key={i} className="particle" style={{
+            width: `${4 + (i % 5)}px`, height: `${4 + (i % 5)}px`,
+            left: `${(i * 47) % 100}%`, top: `${(i * 73) % 100}%`,
+            animationDelay: `${(i % 9) * 0.6}s`,
+            animationDuration: `${6 + (i % 5)}s`,
+            opacity: 0.3 + (i % 5) * 0.1,
+          }} />
+        ))}
+        {/* floating leaves */}
+        {[...Array(8)].map((_, i) => (
+          <span key={`l${i}`} className="leaf-particle" style={{
+            left: `${(i * 31 + 5) % 90}%`, top: `${(i * 19 + 12) % 80}%`,
+            animationDelay: `${i * 0.8}s`, animationDuration: `${12 + i}s`,
+            transform: `rotate(${i * 45}deg)`,
+          }}>
+            <svg viewBox="0 0 24 24" fill="currentColor" className="w-full h-full">
+              <path d="M17 4c0 8-4 12-9 12 0 0-1-7 4-11 0 0 5-1 5-1zM6 20c0-4 3-6 6-7" stroke="currentColor" strokeWidth="1.5" fill="none" strokeLinecap="round"/>
+            </svg>
+          </span>
+        ))}
+      </div>
+      <video ref={videoRef} src={src}
+        className="w-full h-full object-cover"
+        style={{ display: framesReady && !fallback ? "block" : "none" }}
+        muted playsInline preload="auto" crossOrigin="anonymous" autoPlay />
+      <canvas ref={displayCanvasRef}
+        className="w-full h-full object-cover absolute inset-0"
+        style={{ display: framesReady && !fallback ? "block" : "none" }} />
+      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-[#1f4d12]/60" />
+    </div>
+  );
+}
+
+/* ---------- Reveal hook ---------- */
+function useReveal() {
+  const ref = useRef(null);
+  useEffect(() => {
+    const el = ref.current; if (!el) return;
+    const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) el.classList.add("in"); }), { threshold: 0.12 });
+    io.observe(el); return () => io.disconnect();
+  }, []);
+  return ref;
+}
+
+/* ---------- Navbar ---------- */
+function Navbar() {
+  const [menuOpen, setMenuOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+  useEffect(() => {
+    document.body.style.overflow = menuOpen ? "hidden" : "";
+    return () => { document.body.style.overflow = ""; };
+  }, [menuOpen]);
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 30);
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
+  const navLinks = [
+    { href: "#about", label: "About" },
+    { href: "#members", label: "Members" },
+    { href: "#how", label: "How It Works" },
+    { href: "#services", label: "Services" },
+    { href: "#impact", label: "Impact" },
+    { href: "#contact", label: "Contact" },
+  ];
+
+  return (
+    <>
+      <nav className={`fixed top-0 left-0 right-0 z-30 transition-all duration-300 ${scrolled ? "bg-white/85 backdrop-blur-xl border-b border-duo-line shadow-sm" : ""}`}>
+        <div className="max-w-7xl mx-auto flex items-center justify-between px-4 sm:px-6 md:px-8 py-3.5 sm:py-4">
+          <a href="#" className="flex items-center gap-2.5">
+            <span className={`relative flex items-center justify-center w-11 h-11 rounded-2xl ${scrolled ? "bg-duo-green text-white" : "bg-white text-duo-green"} shadow-duoSm`} style={{ boxShadow: scrolled ? "0 3px 0 0 #46a302" : "0 3px 0 0 rgba(0,0,0,0.18)" }}>
+              <Icon name="Recycle" className="w-5 h-5" strokeWidth={2.4} />
+            </span>
+            <div className="leading-tight">
+              <div className={`text-lg sm:text-xl font-black tracking-tight ${scrolled ? "text-duo-forest" : "text-white"}`}>TERECSO</div>
+              <div className={`text-[10px] uppercase tracking-[0.18em] font-bold ${scrolled ? "text-duo-ink2" : "text-white/80"}`}>Tanzania &middot; Since 2011</div>
+            </div>
+          </a>
+
+          <div className={`hidden lg:flex items-center gap-1 rounded-full pl-5 pr-1 py-1 border ${scrolled ? "bg-white border-duo-line" : "bg-white/85 backdrop-blur-md border-white/60"}`}>
+            {navLinks.map((link, i) => (
+              <a key={link.href} href={link.href}
+                className={`text-sm px-3 py-2 rounded-full font-bold transition-colors ${i === 0 ? "text-duo-forest" : "text-duo-ink hover:text-duo-forest"}`}>
+                {link.label}
+              </a>
+            ))}
+            <a href="#join" className="duo-btn sm ml-2">Join now</a>
+          </div>
+
+          <div className="flex items-center gap-2 sm:gap-3">
+            <a href="#donate" className={`hidden md:inline-flex duo-btn sm yellow`}>Donate</a>
+            <button
+              onClick={() => setMenuOpen(v => !v)}
+              className={`lg:hidden relative flex items-center justify-center w-11 h-11 rounded-2xl border ${scrolled ? "bg-white border-duo-line text-duo-forest" : "bg-white/85 backdrop-blur border-white/60 text-duo-forest"} transition-all duration-300`}
+              style={{ boxShadow: "0 3px 0 0 rgba(0,0,0,0.12)" }}
+              aria-label={menuOpen ? "Close menu" : "Open menu"}>
+              <span className={`absolute transition-all duration-300 ${menuOpen ? "opacity-0 rotate-90 scale-50" : "opacity-100 rotate-0 scale-100"}`}>
+                <Icon name="Menu" className="w-5 h-5" />
+              </span>
+              <span className={`absolute transition-all duration-300 ${menuOpen ? "opacity-100 rotate-0 scale-100" : "opacity-0 -rotate-90 scale-50"}`}>
+                <Icon name="X" className="w-5 h-5" />
+              </span>
+            </button>
+          </div>
+        </div>
+      </nav>
+
+      {/* Mobile overlay */}
+      <div className={`lg:hidden fixed inset-0 z-20 transition-opacity duration-300 ${menuOpen ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"}`}
+        onClick={() => setMenuOpen(false)}>
+        <div className="absolute inset-0 bg-duo-forest/45 backdrop-blur-sm" />
+      </div>
+
+      {/* Mobile drawer */}
+      <div className={`lg:hidden fixed top-0 right-0 bottom-0 z-20 w-[85%] max-w-sm bg-white shadow-2xl transition-transform duration-500 ${menuOpen ? "translate-x-0" : "translate-x-full"}`}
+        style={{ transitionTimingFunction: "cubic-bezier(0.22,1,0.36,1)" }}>
+        <div className="flex flex-col h-full pt-24 px-7 pb-8">
+          <div className="flex flex-col gap-1">
+            {navLinks.map((link, i) => (
+              <a key={link.href} href={link.href} onClick={() => setMenuOpen(false)}
+                className={`text-2xl font-extrabold text-duo-forest py-4 border-b border-duo-line transition-all duration-500 ${menuOpen ? "translate-x-0 opacity-100" : "translate-x-8 opacity-0"}`}
+                style={{ transitionDelay: menuOpen ? `${150 + i * 60}ms` : "0ms" }}>
+                {link.label}
+              </a>
+            ))}
+          </div>
+          <div className={`mt-8 flex flex-col gap-3 transition-all duration-500 ${menuOpen ? "translate-x-0 opacity-100" : "translate-x-8 opacity-0"}`}
+            style={{ transitionDelay: menuOpen ? "400ms" : "0ms" }}>
+            <a href="#join" className="duo-btn">Join the cooperative</a>
+            <a href="#donate" className="duo-btn yellow">Donate</a>
+          </div>
+        </div>
+      </div>
+    </>
+  );
+}
+
+/* ---------- Hero ---------- */
+function Hero() {
+  return (
+    <section className="relative w-full min-h-screen overflow-hidden">
+      <BoomerangVideoBg src={BG_VIDEO} className="absolute inset-0 w-full h-full" />
+      <Navbar />
+
+      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 md:px-8 pt-32 sm:pt-36 md:pt-40 pb-32 sm:pb-40">
+        <div className="flex flex-col items-center text-center max-w-4xl mx-auto">
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/85 backdrop-blur-md border-2 border-white shadow-duoSm mb-7" style={{ boxShadow: "0 3px 0 0 rgba(255,255,255,0.4)" }}>
+            <span className="w-2 h-2 rounded-full bg-duo-green pulse-glow" />
+            <span className="text-xs font-extrabold uppercase tracking-widest text-duo-forest">A cooperative since 2011 &middot; Dar es Salaam</span>
+          </div>
+          <h1 className="font-black text-white leading-[0.95] text-[2.5rem] sm:text-6xl md:text-7xl lg:text-[5.5rem]" style={{ letterSpacing: "-0.035em", textShadow: "0 4px 30px rgba(0,0,0,0.25)" }}>
+            We close the loop on <span className="text-duo-mint">Tanzania&rsquo;s</span> waste.
+          </h1>
+          <p className="mt-7 text-white/90 text-base sm:text-lg md:text-xl leading-relaxed max-w-2xl font-semibold" style={{ textShadow: "0 2px 10px rgba(0,0,0,0.25)" }}>
+            Pickers, collectors, recyclers, NGOs &mdash; <span className="text-duo-mint">1,000+ members strong</span>,
+            organising a circular economy that works for everyone.
+          </p>
+          <div className="mt-9 flex items-center gap-3 sm:gap-4 flex-wrap justify-center">
+            <a href="#join" className="duo-btn lg">Join the cooperative <Icon name="ArrowRight" className="w-4 h-4" /></a>
+            <a href="#how" className="duo-btn lg ghost">
+              <span className="flex items-center justify-center w-6 h-6 rounded-full bg-duo-green text-white">
+                <Icon name="Play" className="w-3 h-3" strokeWidth={2.5} />
+              </span>
+              Watch How It Works
+            </a>
+          </div>
+
+          {/* Hero stat strip */}
+          <div className="mt-14 grid grid-cols-3 gap-3 sm:gap-5 w-full max-w-3xl">
+            {[
+              { v: "1,000+", k: "Members" },
+              { v: "600+", k: "Collection points" },
+              { v: "20+", k: "Factories connected" },
+            ].map(s => (
+              <div key={s.k} className="bg-white/90 backdrop-blur-md rounded-2xl border-2 border-white px-3 py-4 sm:py-5 shadow-duoSm" style={{ boxShadow: "0 4px 0 0 rgba(255,255,255,0.45)" }}>
+                <div className="text-duo-forest text-2xl sm:text-3xl md:text-4xl font-black" style={{ letterSpacing: "-0.02em" }}>{s.v}</div>
+                <div className="text-duo-ink2 text-[11px] sm:text-xs font-extrabold uppercase tracking-widest mt-1">{s.k}</div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+
+      {/* Floating mascot/circular badge */}
+      <div className="hidden md:block absolute right-6 lg:right-12 top-32 z-10 float-1">
+        <div className="relative w-44 h-44">
+          <div className="absolute inset-0 rounded-full border-2 border-dashed border-white/40 spin-slow" />
+          <div className="absolute inset-3 rounded-full bg-duo-green border-4 border-white shadow-duo flex flex-col items-center justify-center text-white">
+            <Icon name="Recycle" className="w-9 h-9" strokeWidth={2.5} />
+            <div className="text-[10px] font-black uppercase tracking-widest mt-2">100% Circular</div>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+/* ---------- Marquee ---------- */
+function Marquee() {
+  const items = [
+    { i: "Recycle", t: "Plastic & PET" },
+    { i: "Factory", t: "20+ Off-takers" },
+    { i: "Leaf", t: "ISO-14001 Aligned" },
+    { i: "Users", t: "1,000+ Members" },
+    { i: "Shield", t: "NEMC Compliant" },
+    { i: "Globe", t: "UN SDG Aligned" },
+  ];
+  const row = [...items, ...items];
+  return (
+    <div className="relative bg-duo-cream border-y-2 border-duo-line overflow-hidden">
+      <div className="flex marquee-track whitespace-nowrap py-5">
+        {row.map((t, i) => (
+          <div key={i} className="flex items-center gap-3 pr-10 text-duo-forest text-sm font-extrabold uppercase tracking-[0.15em]">
+            <span className="flex items-center justify-center w-9 h-9 rounded-xl bg-white border-2 border-duo-line shadow-card">
+              <Icon name={t.i} className="w-4 h-4 text-duo-green" />
+            </span>
+            <span>{t.t}</span>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+/* ---------- About ---------- */
+function About() {
+  const ref = useReveal();
+  return (
+    <section id="about" className="relative bg-duo-cream py-20 sm:py-28 px-4 sm:px-6 md:px-8 overflow-hidden">
+      <div className="absolute inset-0 dot-bg opacity-40 pointer-events-none" />
+      <div ref={ref} className="reveal relative max-w-7xl mx-auto">
+        <div className="grid lg:grid-cols-12 gap-10 lg:gap-16 items-start">
+          <div className="lg:col-span-7">
+            <div className="chip green mb-5"><Icon name="Leaf" className="w-3 h-3" /> About TERECSO</div>
+            <h2 className="text-duo-forest text-4xl sm:text-5xl md:text-6xl font-black leading-[1.02]" style={{ letterSpacing: "-0.03em" }}>
+              A Tanzanian <span className="text-duo-green">cooperative</span>, turning waste into <span className="text-duo-green">livelihoods</span>.
+            </h2>
+            <p className="mt-7 text-duo-ink text-base sm:text-lg leading-relaxed max-w-2xl font-medium">
+              TERECSO &mdash; The Environmental Conservation and Recycling Cooperative
+              Society Organization &mdash; was founded in 2011 to bring structure,
+              dignity and shared profit to recycling in Tanzania. Today we unite
+              <strong className="text-duo-forest"> pickers, collectors, recyclers,
+              NGOs and environmental associations</strong> under one cooperative
+              umbrella.
+            </p>
+            <p className="mt-5 text-duo-ink text-base sm:text-lg leading-relaxed max-w-2xl font-medium">
+              From a small base in Ubungo, we now operate across Dar es Salaam &mdash;
+              and through partnerships, across Tanzania. Every kilogram we
+              collect feeds back into a circular system that pays members fairly
+              and supplies recycled material to local industry.
+            </p>
+            <div className="mt-9 flex flex-wrap gap-3">
+              <a href="#join" className="duo-btn">Become a member <Icon name="ArrowRight" className="w-4 h-4" /></a>
+              <a href="#impact" className="duo-btn ghost">See our impact</a>
+            </div>
+          </div>
+
+          <div className="lg:col-span-5">
+            <div className="relative">
+              <div className="duo-card p-6 sm:p-7">
+                <div className="flex items-center gap-3 mb-4">
+                  <span className="w-12 h-12 rounded-2xl bg-duo-mint2 border-2 border-duo-mint flex items-center justify-center text-duo-forest" style={{ boxShadow: "0 3px 0 0 #B7E893" }}>
+                    <Icon name="Sparkles" className="w-5 h-5" />
+                  </span>
+                  <div>
+                    <div className="text-duo-ink2 text-xs font-extrabold uppercase tracking-widest">Our mission</div>
+                    <div className="text-duo-forest font-black">Cooperative circular economy</div>
+                  </div>
+                </div>
+                <p className="text-duo-ink text-sm leading-relaxed font-medium">
+                  To organise informal recyclers into a profitable, professional
+                  cooperative &mdash; while building the infrastructure Tanzania needs
+                  to keep materials in use and out of landfill.
+                </p>
+                <div className="mt-5 grid grid-cols-3 gap-2 text-center">
+                  {[
+                    { v: "2011", k: "Founded" },
+                    { v: "1k+", k: "Members" },
+                    { v: "5", k: "Districts" },
+                  ].map(s => (
+                    <div key={s.k} className="bg-duo-mint2 border-2 border-duo-mint rounded-xl py-2.5">
+                      <div className="text-duo-forest font-black text-lg">{s.v}</div>
+                      <div className="text-duo-ink2 text-[10px] font-extrabold uppercase tracking-widest">{s.k}</div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* floating badge card */}
+              <div className="absolute -top-5 -right-3 sm:-right-6 duo-card p-3 px-4 flex items-center gap-3 bg-white wiggle float-1">
+                <span className="w-9 h-9 rounded-xl bg-duo-yellow flex items-center justify-center" style={{ boxShadow: "0 3px 0 0 #D5A500" }}>
+                  <Icon name="Star" className="w-4 h-4 text-white" strokeWidth={2.5} />
+                </span>
+                <div>
+                  <div className="text-duo-forest font-black text-sm">Cooperative of the Year</div>
+                  <div className="text-duo-ink2 text-[10px] font-extrabold uppercase tracking-widest">TZ Sustainability Awards &middot; 2024</div>
+                </div>
+              </div>
+
+              <div className="absolute -bottom-4 -left-3 sm:-left-6 duo-card p-3 px-4 flex items-center gap-3 bg-white float-2">
+                <span className="w-9 h-9 rounded-xl bg-duo-blue flex items-center justify-center" style={{ boxShadow: "0 3px 0 0 #0B81C2" }}>
+                  <Icon name="Users" className="w-4 h-4 text-white" strokeWidth={2.5} />
+                </span>
+                <div>
+                  <div className="text-duo-forest font-black text-sm">+38 members this month</div>
+                  <div className="text-duo-ink2 text-[10px] font-extrabold uppercase tracking-widest">Live registry</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+/* ---------- Members ---------- */
+function Members() {
+  const ref = useReveal();
+  const cats = [
+    { i: "Trash",   t: "Pickers",     n: "620+", c: "from-duo-green to-duo-green2", desc: "Frontline collectors recovering recyclables from streets, markets and households." },
+    { i: "Truck",   t: "Collectors",  n: "210+", c: "from-duo-blue to-[#0F8FCB]", desc: "Logistics partners moving sorted material to MRFs and off-takers." },
+    { i: "Factory", t: "Recyclers",   n: "120+", c: "from-duo-yellow to-[#D9A800]", desc: "Material processors turning recovered streams into new feedstock." },
+    { i: "HeartHandshake", t: "NGOs & Associations", n: "50+", c: "from-duo-red to-[#D33636]", desc: "Civic partners running education, advocacy and field programs alongside us." },
+  ];
+  return (
+    <section id="members" className="relative bg-white py-20 sm:py-28 px-4 sm:px-6 md:px-8">
+      <div ref={ref} className="reveal max-w-7xl mx-auto">
+        <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-6 mb-12">
+          <div>
+            <div className="chip green mb-5"><Icon name="Users" className="w-3 h-3" /> Membership</div>
+            <h2 className="text-duo-forest text-4xl sm:text-5xl md:text-6xl font-black leading-[1.02] max-w-3xl" style={{ letterSpacing: "-0.03em" }}>
+              Four kinds of members. <span className="text-duo-green">One cooperative.</span>
+            </h2>
+          </div>
+          <p className="text-duo-ink text-base max-w-md font-medium">
+            Whatever your role in Tanzania&rsquo;s recycling chain, there is a
+            place for you at TERECSO &mdash; with shared income, training and
+            collective bargaining built in.
+          </p>
+        </div>
+
+        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
+          {cats.map((c, i) => (
+            <div key={i} className="duo-card p-6 hover:-translate-y-1 transition-transform group">
+              <div className={`w-14 h-14 rounded-2xl bg-gradient-to-br ${c.c} flex items-center justify-center text-white mb-5`} style={{ boxShadow: "0 4px 0 0 rgba(0,0,0,0.18)" }}>
+                <Icon name={c.i} className="w-6 h-6" strokeWidth={2.4} />
+              </div>
+              <div className="text-duo-ink2 text-xs font-extrabold uppercase tracking-widest mb-2">{c.n} members</div>
+              <h3 className="text-duo-forest text-2xl font-black mb-2" style={{ letterSpacing: "-0.01em" }}>{c.t}</h3>
+              <p className="text-duo-ink text-sm leading-relaxed font-medium">{c.desc}</p>
+              <div className="mt-5 flex items-center gap-2 text-duo-green font-extrabold text-sm group-hover:gap-3 transition-all">
+                Learn more <Icon name="ArrowRight" className="w-4 h-4" />
+              </div>
+            </div>
+          ))}
+        </div>
+
+        {/* Member benefits */}
+        <div className="mt-12 duo-card bg-duo-mint2 border-duo-mint p-7 sm:p-10" style={{ boxShadow: "0 4px 0 0 #B7E893" }}>
+          <div className="grid md:grid-cols-2 gap-8 items-center">
+            <div>
+              <div className="chip yellow mb-4"><Icon name="Sparkles" className="w-3 h-3" /> Why join</div>
+              <h3 className="text-duo-forest text-3xl sm:text-4xl font-black leading-tight" style={{ letterSpacing: "-0.02em" }}>
+                Membership pays &mdash; literally.
+              </h3>
+              <p className="mt-4 text-duo-ink font-medium">
+                Members earn from collection sales, the cooperative investment
+                fund, and shared services. Plus access to training, equipment
+                and healthcare.
+              </p>
+              <a href="#join" className="mt-6 inline-flex duo-btn">Join now <Icon name="ArrowRight" className="w-4 h-4" /></a>
+            </div>
+            <ul className="grid grid-cols-2 gap-3">
+              {[
+                "Fair, transparent prices",
+                "Investment dividends",
+                "Free skills training",
+                "Protective equipment",
+                "Group health cover",
+                "Legal representation",
+              ].map(b => (
+                <li key={b} className="flex items-center gap-3 bg-white rounded-xl border-2 border-duo-mint px-3 py-3 font-bold text-duo-forest text-sm" style={{ boxShadow: "0 3px 0 0 #B7E893" }}>
+                  <span className="w-6 h-6 rounded-full bg-duo-green flex items-center justify-center text-white">
+                    <Icon name="Check" className="w-3.5 h-3.5" strokeWidth={3} />
+                  </span>
+                  {b}
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+/* ---------- How It Works (Circular workflow) ---------- */
+function HowItWorks() {
+  const ref = useReveal();
+  const steps = [
+    { i: "Trash",   t: "Collect",      d: "Members source-separate waste from streets, households and businesses across Dar es Salaam." },
+    { i: "Truck",   t: "Transport",    d: "Collector teams aggregate materials to neighborhood drop points, then to our MRF." },
+    { i: "Recycle", t: "Sort & Process", d: "PET, HDPE, paper, metal, glass and e-waste are sorted, baled or processed." },
+    { i: "Factory", t: "Reintegrate",  d: "Recycled feedstock returns to 20+ local Tanzanian factories &mdash; closing the loop." },
+    { i: "Coins",   t: "Members Earn", d: "Revenue is shared transparently with members, plus a slice into the investment fund." },
+  ];
+  return (
+    <section id="how" className="relative bg-duo-cream py-20 sm:py-28 px-4 sm:px-6 md:px-8 overflow-hidden">
+      <div className="absolute inset-0 dot-bg opacity-40 pointer-events-none" />
+      <div ref={ref} className="reveal relative max-w-7xl mx-auto">
+        <div className="text-center max-w-3xl mx-auto mb-14">
+          <div className="chip green mx-auto mb-5"><Icon name="Recycle" className="w-3 h-3" /> The Circular Loop</div>
+          <h2 className="text-duo-forest text-4xl sm:text-5xl md:text-6xl font-black leading-[1.02]" style={{ letterSpacing: "-0.03em" }}>
+            How TERECSO closes the loop, <span className="text-duo-green">step by step</span>.
+          </h2>
+        </div>
+
+        {/* Big circular layout (desktop), stacked on mobile */}
+        <div className="relative">
+          {/* Mobile: vertical list */}
+          <div className="lg:hidden flex flex-col gap-4">
+            {steps.map((s, i) => (
+              <div key={i} className="duo-card p-5 flex items-start gap-4">
+                <div className="flex-none w-12 h-12 rounded-2xl bg-duo-green text-white flex items-center justify-center" style={{ boxShadow: "0 3px 0 0 #46a302" }}>
+                  <Icon name={s.i} className="w-5 h-5" strokeWidth={2.4} />
+                </div>
+                <div>
+                  <div className="flex items-center gap-2 mb-1">
+                    <span className="text-duo-green text-xs font-extrabold uppercase tracking-widest">Step 0{i+1}</span>
+                  </div>
+                  <h3 className="text-duo-forest font-black text-xl">{s.t}</h3>
+                  <p className="text-duo-ink text-sm mt-1 font-medium">{s.d}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          {/* Desktop: circular */}
+          <div className="hidden lg:block relative w-full max-w-3xl mx-auto aspect-square">
+            <div className="absolute inset-12 rounded-full border-4 border-dashed border-duo-mint spin-slow" style={{ animationDuration: "100s" }} />
+            <div className="absolute inset-28 rounded-full bg-white border-2 border-duo-line flex flex-col items-center justify-center text-center px-10" style={{ boxShadow: "0 4px 0 0 #E5E5E5" }}>
+              <Icon name="Recycle" className="w-12 h-12 text-duo-green mb-3" strokeWidth={2.2} />
+              <div className="text-duo-forest font-black text-xl" style={{ letterSpacing: "-0.01em" }}>The TERECSO Loop</div>
+              <div className="text-duo-ink2 text-sm font-medium mt-1">5 stages &middot; 1 cooperative</div>
+            </div>
+            {steps.map((s, i) => {
+              const angle = (i / steps.length) * Math.PI * 2 - Math.PI/2;
+              const r = 46;
+              const x = 50 + r * Math.cos(angle);
+              const y = 50 + r * Math.sin(angle);
+              return (
+                <div key={i} className="absolute" style={{ left: `${x}%`, top: `${y}%`, transform: "translate(-50%,-50%)" }}>
+                  <div className="duo-card p-4 w-56 hover:-translate-y-1 transition-transform">
+                    <div className="flex items-center gap-3 mb-2">
+                      <span className="w-10 h-10 rounded-xl bg-duo-green text-white flex items-center justify-center" style={{ boxShadow: "0 3px 0 0 #46a302" }}>
+                        <Icon name={s.i} className="w-4 h-4" strokeWidth={2.4} />
+                      </span>
+                      <span className="text-duo-green text-[11px] font-extrabold uppercase tracking-widest">Step 0{i+1}</span>
+                    </div>
+                    <div className="text-duo-forest font-black text-lg leading-tight">{s.t}</div>
+                    <div className="text-duo-ink text-xs mt-1 font-medium leading-relaxed">{s.d}</div>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+/* ---------- Services ---------- */
+function Services() {
+  const ref = useReveal();
+  const items = [
+    { i: "Recycle", t: "Waste Recycling", d: "End-to-end collection, sorting and processing of plastics, paper, metals and e-waste.", c: "green" },
+    { i: "Book",    t: "Environmental Education", d: "School programs, community workshops and field labs across Dar es Salaam.", c: "blue" },
+    { i: "Coins",   t: "Cooperative Investment", d: "Pooled member savings funding recycling equipment, transport and new business lines.", c: "yellow" },
+    { i: "Store",   t: "Green Marketplace", d: "Verified recycled-material marketplace &mdash; connecting our MRF to off-takers.", c: "green" },
+    { i: "Users",   t: "Member Empowerment", d: "Healthcare, PPE, financial literacy and legal support for cooperative members.", c: "red" },
+    { i: "Shield",  t: "Material Assurance", d: "Chain-of-custody documentation and certification for industrial buyers.", c: "blue" },
+  ];
+  const tones = {
+    green:  { bg: "bg-duo-green", sh: "0 4px 0 0 #46a302" },
+    blue:   { bg: "bg-duo-blue",  sh: "0 4px 0 0 #0B81C2" },
+    yellow: { bg: "bg-duo-yellow text-duo-ink", sh: "0 4px 0 0 #D5A500" },
+    red:    { bg: "bg-duo-red",   sh: "0 4px 0 0 #C73838" },
+  };
+  return (
+    <section id="services" className="relative bg-white py-20 sm:py-28 px-4 sm:px-6 md:px-8">
+      <div ref={ref} className="reveal max-w-7xl mx-auto">
+        <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-6 mb-12">
+          <div>
+            <div className="chip green mb-5"><Icon name="Sparkles" className="w-3 h-3" /> Services &amp; programs</div>
+            <h2 className="text-duo-forest text-4xl sm:text-5xl md:text-6xl font-black leading-[1.02] max-w-3xl" style={{ letterSpacing: "-0.03em" }}>
+              Everything a circular cooperative <span className="text-duo-green">needs</span>.
+            </h2>
+          </div>
+          <p className="text-duo-ink text-base max-w-md font-medium">
+            We don&rsquo;t just collect &mdash; we educate, finance, certify, and
+            create markets, so the loop keeps spinning.
+          </p>
+        </div>
+
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
+          {items.map((it, i) => {
+            const t = tones[it.c];
+            return (
+              <div key={i} className="duo-card p-7 hover:-translate-y-1 transition-transform group flex flex-col">
+                <div className={`w-14 h-14 rounded-2xl ${t.bg} text-white flex items-center justify-center mb-6`} style={{ boxShadow: t.sh }}>
+                  <Icon name={it.i} className="w-6 h-6" strokeWidth={2.4} />
+                </div>
+                <h3 className="text-duo-forest text-xl font-black mb-2" style={{ letterSpacing: "-0.01em" }}>{it.t}</h3>
+                <p className="text-duo-ink text-sm leading-relaxed font-medium flex-1">{it.d}</p>
+                <a href="#contact" className="mt-6 inline-flex items-center gap-2 text-duo-green font-extrabold text-sm group-hover:gap-3 transition-all">
+                  Learn more <Icon name="ArrowRight" className="w-4 h-4" />
+                </a>
+              </div>
+            );
+          })}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+/* ---------- Impact ---------- */
+function Impact() {
+  const ref = useReveal();
+  const stats = [
+    { v: "1,000+", k: "Cooperative members" },
+    { v: "600+",   k: "Active collection points" },
+    { v: "20+",    k: "Tanzanian factories connected" },
+    { v: "8,400 t", k: "Material recovered (lifetime)" },
+    { v: "5",      k: "Dar es Salaam districts" },
+    { v: "2011",   k: "Cooperative founded" },
+  ];
+  return (
+    <section id="impact" className="relative bg-duo-forest text-white py-20 sm:py-28 px-4 sm:px-6 md:px-8 overflow-hidden">
+      <div className="absolute inset-0 opacity-30" style={{
+        backgroundImage: "radial-gradient(circle at 1.2px 1.2px, rgba(215,255,184,0.4) 1.2px, transparent 1.4px)",
+        backgroundSize: "26px 26px"
+      }} />
+      <div className="absolute -top-32 -right-32 w-[500px] h-[500px] rounded-full pulse-glow"
+        style={{ background: "radial-gradient(circle, rgba(88,204,2,0.35), transparent 60%)", filter: "blur(50px)" }} />
+      <div className="absolute -bottom-32 -left-32 w-[500px] h-[500px] rounded-full float-1"
+        style={{ background: "radial-gradient(circle, rgba(215,255,184,0.25), transparent 60%)", filter: "blur(50px)" }} />
+
+      <div ref={ref} className="reveal relative max-w-7xl mx-auto">
+        <div className="text-center max-w-3xl mx-auto mb-14">
+          <div className="chip green mx-auto mb-5" style={{ background: "rgba(215,255,184,0.15)", borderColor: "rgba(215,255,184,0.3)", color: "#D7FFB8" }}>
+            <Icon name="Sparkles" className="w-3 h-3" /> Impact &amp; reach
+          </div>
+          <h2 className="text-white text-4xl sm:text-5xl md:text-6xl font-black leading-[1.02]" style={{ letterSpacing: "-0.03em" }}>
+            Numbers that <span className="text-duo-mint">tell our story</span>.
+          </h2>
+          <p className="mt-5 text-white/75 font-medium text-lg max-w-xl mx-auto">
+            Every figure below is reconciled to member contributions, collection
+            manifests and processing logs.
+          </p>
+        </div>
+
+        <div className="grid grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5">
+          {stats.map((s, i) => (
+            <div key={i} className="bg-white/[0.06] backdrop-blur-sm border-2 border-white/15 rounded-2xl p-6 sm:p-7" style={{ boxShadow: "inset 0 -3px 0 rgba(255,255,255,0.06)" }}>
+              <div className="text-duo-mint text-xs font-extrabold uppercase tracking-widest mb-3">0{i+1}</div>
+              <div className="text-white text-4xl sm:text-5xl font-black" style={{ letterSpacing: "-0.025em" }}>{s.v}</div>
+              <div className="text-white/85 text-sm font-bold mt-3 leading-snug">{s.k}</div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+/* ---------- App preview ---------- */
+function AppPreview() {
+  const ref = useReveal();
+  return (
+    <section className="relative bg-white py-20 sm:py-28 px-4 sm:px-6 md:px-8 overflow-hidden">
+      <div ref={ref} className="reveal max-w-7xl mx-auto grid lg:grid-cols-12 gap-12 items-center">
+        <div className="lg:col-span-6">
+          <div className="chip blue mb-5"><Icon name="Bolt" className="w-3 h-3" /> Coming soon</div>
+          <h2 className="text-duo-forest text-4xl sm:text-5xl md:text-6xl font-black leading-[1.02]" style={{ letterSpacing: "-0.03em" }}>
+            The TERECSO app, <span className="text-duo-green">in your pocket</span>.
+          </h2>
+          <p className="mt-6 text-duo-ink text-base sm:text-lg font-medium max-w-lg">
+            Every kilogram, every pickup, every payment &mdash; visible in real
+            time. Members log collections, track earnings and book training,
+            right from a phone.
+          </p>
+          <ul className="mt-8 space-y-3">
+            {[
+              "Log daily collections by category",
+              "See live earnings &amp; co-op dividends",
+              "Book training, PPE and equipment loans",
+              "Verified buyer marketplace, in-app",
+            ].map(b => (
+              <li key={b} className="flex items-center gap-3 font-bold text-duo-forest">
+                <span className="w-7 h-7 rounded-full bg-duo-green flex items-center justify-center text-white">
+                  <Icon name="Check" className="w-4 h-4" strokeWidth={3} />
+                </span>
+                <span dangerouslySetInnerHTML={{ __html: b }} />
+              </li>
+            ))}
+          </ul>
+          <div className="mt-9 flex flex-wrap gap-3">
+            <a href="#" className="duo-btn dark">
+              <span className="text-[10px] opacity-80 font-bold">Download on the</span>
+              <span className="ml-1 font-black">App Store</span>
+            </a>
+            <a href="#" className="duo-btn">
+              <span className="text-[10px] opacity-80 font-bold">Get it on</span>
+              <span className="ml-1 font-black">Google Play</span>
+            </a>
+          </div>
+        </div>
+
+        <div className="lg:col-span-6 flex items-center justify-center">
+          <div className="relative">
+            {/* Decorative floating shapes */}
+            <div className="absolute -left-6 -top-6 w-14 h-14 rounded-2xl bg-duo-yellow flex items-center justify-center text-white float-1" style={{ boxShadow: "0 4px 0 0 #D5A500" }}>
+              <Icon name="Coins" className="w-6 h-6" />
+            </div>
+            <div className="absolute -right-4 top-12 w-12 h-12 rounded-2xl bg-duo-red flex items-center justify-center text-white float-2" style={{ boxShadow: "0 4px 0 0 #C73838" }}>
+              <Icon name="Recycle" className="w-5 h-5" />
+            </div>
+            <div className="absolute -right-8 bottom-20 w-14 h-14 rounded-full bg-duo-blue flex items-center justify-center text-white pulse-glow" style={{ boxShadow: "0 4px 0 0 #0B81C2" }}>
+              <Icon name="Bolt" className="w-6 h-6" />
+            </div>
+
+            <div className="phone">
+              <div className="phone-screen">
+                <div className="phone-notch" />
+                <div className="absolute inset-0 flex flex-col">
+                  {/* status bar fake */}
+                  <div className="pt-12 px-6 pb-2 flex items-center justify-between text-[10px] font-bold text-duo-forest">
+                    <span>9:41</span>
+                    <span>5G</span>
+                  </div>
+                  <div className="px-5 pt-2 pb-4 flex items-center justify-between">
+                    <div>
+                      <div className="text-duo-ink2 text-[10px] font-bold uppercase tracking-widest">Habari, Asha</div>
+                      <div className="text-duo-forest font-black text-base">Today&rsquo;s pickup</div>
+                    </div>
+                    <span className="w-9 h-9 rounded-full bg-duo-mint2 border-2 border-duo-mint flex items-center justify-center text-duo-forest font-black">A</span>
+                  </div>
+
+                  {/* Earnings card */}
+                  <div className="mx-4 rounded-2xl bg-duo-forest text-white p-4 relative overflow-hidden">
+                    <div className="absolute -right-6 -top-6 w-24 h-24 rounded-full bg-duo-green/40 blur-xl" />
+                    <div className="text-duo-mint text-[10px] font-extrabold uppercase tracking-widest">This week</div>
+                    <div className="text-3xl font-black mt-1">TSh 142,300</div>
+                    <div className="text-white/70 text-[11px] mt-0.5 font-bold">+18% vs. last week</div>
+                    <div className="mt-3 flex gap-1.5">
+                      {[40, 65, 30, 80, 55, 70, 90].map((h, i) => (
+                        <div key={i} className="flex-1 rounded bg-duo-mint/80" style={{ height: `${h*0.4}px` }} />
+                      ))}
+                    </div>
+                  </div>
+
+                  {/* Today's log */}
+                  <div className="px-4 mt-4">
+                    <div className="text-duo-forest font-black text-sm mb-2">Today&rsquo;s collections</div>
+                    {[
+                      { i: "Recycle", t: "PET bottles", w: "12.4 kg", tone: "bg-duo-mint2 border-duo-mint text-duo-forest" },
+                      { i: "Leaf",    t: "Cardboard",  w: "8.1 kg",  tone: "bg-[#E1F3FF] border-[#A7D8F4] text-[#0b6ea0]" },
+                      { i: "Trash",   t: "Mixed plastic", w: "5.6 kg", tone: "bg-[#FFF6D6] border-[#FFE08A] text-[#8a6900]" },
+                    ].map((row, i) => (
+                      <div key={i} className={`mt-2 rounded-xl border-2 px-3 py-2.5 flex items-center gap-3 ${row.tone}`}>
+                        <Icon name={row.i} className="w-4 h-4" />
+                        <div className="text-xs font-extrabold flex-1">{row.t}</div>
+                        <div className="text-xs font-black">{row.w}</div>
+                      </div>
+                    ))}
+                  </div>
+
+                  {/* CTA fake */}
+                  <div className="mt-auto p-4">
+                    <button className="w-full duo-btn">+ Log new pickup</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+/* ---------- Marketplace ---------- */
+function Marketplace() {
+  const ref = useReveal();
+  return (
+    <section className="relative bg-duo-cream py-20 sm:py-28 px-4 sm:px-6 md:px-8 overflow-hidden">
+      <div className="absolute inset-0 dot-bg opacity-40 pointer-events-none" />
+      <div ref={ref} className="reveal relative max-w-7xl mx-auto grid lg:grid-cols-12 gap-10 items-center">
+        <div className="lg:col-span-5 order-2 lg:order-1">
+          <div className="grid grid-cols-2 gap-4">
+            {[
+              { i: "Recycle", t: "PET Flake", g: "1,240 kg", p: "TSh 850/kg", c: "from-duo-green to-duo-green2", tone: "text-white" },
+              { i: "Leaf",    t: "OCC Bales", g: "3,100 kg", p: "TSh 320/kg", c: "from-duo-blue to-[#0F8FCB]", tone: "text-white" },
+              { i: "Factory", t: "HDPE Pellets", g: "620 kg", p: "TSh 1,100/kg", c: "from-duo-yellow to-[#D9A800]", tone: "text-duo-ink" },
+              { i: "Trash",   t: "Mixed Metals", g: "880 kg", p: "TSh 1,650/kg", c: "from-[#3C3C3C] to-[#1f1f1f]", tone: "text-white" },
+            ].map((card, i) => (
+              <div key={i} className={`rounded-2xl bg-gradient-to-br ${card.c} ${card.tone} p-5 relative overflow-hidden border-2 border-white/20`} style={{ boxShadow: "0 4px 0 0 rgba(0,0,0,0.18)" }}>
+                <div className="absolute -right-6 -top-6 w-24 h-24 rounded-full bg-white/15" />
+                <Icon name={card.i} className="w-6 h-6 mb-4 relative" />
+                <div className="text-[10px] font-extrabold uppercase tracking-widest opacity-80 relative">In stock</div>
+                <div className="font-black text-lg mt-1 relative">{card.t}</div>
+                <div className="text-xs opacity-90 font-bold mt-1 relative">{card.g}</div>
+                <div className="mt-3 inline-flex items-center gap-1 bg-white/20 rounded-full px-2 py-0.5 text-[11px] font-extrabold relative">{card.p}</div>
+              </div>
+            ))}
+          </div>
+        </div>
+        <div className="lg:col-span-7 order-1 lg:order-2">
+          <div className="chip yellow mb-5"><Icon name="Store" className="w-3 h-3" /> Green Marketplace</div>
+          <h2 className="text-duo-forest text-4xl sm:text-5xl md:text-6xl font-black leading-[1.02]" style={{ letterSpacing: "-0.03em" }}>
+            Recycled material <span className="text-duo-green">on demand</span>, traceable to source.
+          </h2>
+          <p className="mt-6 text-duo-ink text-base sm:text-lg font-medium max-w-xl">
+            A live inventory of cooperative-supplied feedstock &mdash; PET, OCC,
+            HDPE, paper and metals. Every batch is tagged to the members and
+            collection points that produced it.
+          </p>
+          <div className="mt-8 grid sm:grid-cols-3 gap-3">
+            {[
+              { v: "20+", k: "Off-takers" },
+              { v: "100%", k: "Traceable" },
+              { v: "&lt; 48h", k: "Avg fulfillment" },
+            ].map(s => (
+              <div key={s.k} className="duo-card tinted p-4 text-center">
+                <div className="text-duo-forest font-black text-2xl" dangerouslySetInnerHTML={{ __html: s.v }} />
+                <div className="text-duo-ink2 text-[11px] font-extrabold uppercase tracking-widest mt-1">{s.k}</div>
+              </div>
+            ))}
+          </div>
+          <div className="mt-8 flex flex-wrap gap-3">
+            <a href="#contact" className="duo-btn">Request material <Icon name="ArrowRight" className="w-4 h-4" /></a>
+            <a href="#contact" className="duo-btn ghost">Become an off-taker</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+/* ---------- Challenges & Solutions ---------- */
+function Challenges() {
+  const ref = useReveal();
+  const pairs = [
+    {
+      c: "Informal recyclers earn unfair, unstable prices",
+      s: "Cooperative pricing &amp; bulk negotiation with off-takers",
+    },
+    {
+      c: "Most plastic in Dar leaks into the environment",
+      s: "600+ collection points across 5 districts",
+    },
+    {
+      c: "Pickers lack PPE, healthcare and training",
+      s: "Member benefits package &amp; weekly training",
+    },
+    {
+      c: "Local factories rely on imported feedstock",
+      s: "Verified Tanzanian recycled material at scale",
+    },
+  ];
+  return (
+    <section className="relative bg-white py-20 sm:py-28 px-4 sm:px-6 md:px-8">
+      <div ref={ref} className="reveal max-w-7xl mx-auto">
+        <div className="text-center max-w-3xl mx-auto mb-12">
+          <div className="chip green mx-auto mb-5"><Icon name="LightBulb" className="w-3 h-3" /> Challenges &amp; solutions</div>
+          <h2 className="text-duo-forest text-4xl sm:text-5xl md:text-6xl font-black leading-[1.02]" style={{ letterSpacing: "-0.03em" }}>
+            Tackling Tanzania&rsquo;s waste reality &mdash; <span className="text-duo-green">head on</span>.
+          </h2>
+        </div>
+
+        <div className="grid md:grid-cols-2 gap-5">
+          {pairs.map((p, i) => (
+            <div key={i} className="duo-card p-6 sm:p-7 grid sm:grid-cols-2 gap-5">
+              <div className="border-2 border-[#FFD8D8] bg-[#FFF0F0] rounded-2xl p-4" style={{ boxShadow: "0 3px 0 0 #FFC4C4" }}>
+                <div className="flex items-center gap-2 text-[#C73838] text-[11px] font-extrabold uppercase tracking-widest mb-2">
+                  <Icon name="AlertTriangle" className="w-3.5 h-3.5" />
+                  The challenge
+                </div>
+                <p className="text-[#7c1f1f] font-bold text-sm leading-relaxed" dangerouslySetInnerHTML={{ __html: p.c }} />
+              </div>
+              <div className="border-2 border-duo-mint bg-duo-mint2 rounded-2xl p-4" style={{ boxShadow: "0 3px 0 0 #B7E893" }}>
+                <div className="flex items-center gap-2 text-duo-green3 text-[11px] font-extrabold uppercase tracking-widest mb-2">
+                  <Icon name="Check" className="w-3.5 h-3.5" strokeWidth={3} />
+                  Our solution
+                </div>
+                <p className="text-duo-forest font-bold text-sm leading-relaxed" dangerouslySetInnerHTML={{ __html: p.s }} />
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+/* ---------- Leadership & Branches ---------- */
+function Branches() {
+  const ref = useReveal();
+  const leaders = [
+    { n: "Asha Mwakasege", r: "Founder &amp; Chairperson", init: "AM", tone: "bg-duo-green" },
+    { n: "Daudi Mbwana",   r: "Secretary General",        init: "DM", tone: "bg-duo-blue" },
+    { n: "Neema Lekule",   r: "Director, Operations",     init: "NL", tone: "bg-duo-yellow text-duo-ink" },
+    { n: "Ibrahim Salim",  r: "Director, Members",        init: "IS", tone: "bg-duo-red" },
+  ];
+  const branches = [
+    { c: "Ubungo",   d: "Headquarters &middot; Machinga Complex" },
+    { c: "Kinondoni", d: "MRF &amp; logistics hub" },
+    { c: "Ilala",     d: "Education &amp; community centre" },
+    { c: "Temeke",    d: "Coastal collection routes" },
+    { c: "Kigamboni", d: "Field training base" },
+  ];
+  return (
+    <section className="relative bg-duo-cream py-20 sm:py-28 px-4 sm:px-6 md:px-8">
+      <div ref={ref} className="reveal max-w-7xl mx-auto">
+        <div className="grid lg:grid-cols-12 gap-10 lg:gap-16">
+          <div className="lg:col-span-7">
+            <div className="chip blue mb-5"><Icon name="Users" className="w-3 h-3" /> Leadership</div>
+            <h2 className="text-duo-forest text-4xl sm:text-5xl md:text-6xl font-black leading-[1.02]" style={{ letterSpacing: "-0.03em" }}>
+              Member-elected. <span className="text-duo-green">Member-led.</span>
+            </h2>
+            <p className="mt-5 text-duo-ink font-medium max-w-xl">
+              TERECSO is governed by an executive committee elected from the
+              membership every three years. Decisions are made together &mdash;
+              and the books are always open.
+            </p>
+            <div className="mt-8 grid sm:grid-cols-2 gap-4">
+              {leaders.map(l => (
+                <div key={l.n} className="duo-card p-4 flex items-center gap-4">
+                  <div className={`w-14 h-14 rounded-2xl ${l.tone} text-white font-black flex items-center justify-center text-lg`} style={{ boxShadow: "0 3px 0 0 rgba(0,0,0,0.18)" }}>
+                    {l.init}
+                  </div>
+                  <div>
+                    <div className="text-duo-forest font-black">{l.n}</div>
+                    <div className="text-duo-ink2 text-xs font-bold" dangerouslySetInnerHTML={{ __html: l.r }} />
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <div className="lg:col-span-5">
+            <div className="chip green mb-5"><Icon name="MapPin" className="w-3 h-3" /> Branches</div>
+            <h3 className="text-duo-forest text-3xl sm:text-4xl font-black leading-tight" style={{ letterSpacing: "-0.02em" }}>
+              Across Dar es Salaam &mdash; and growing.
+            </h3>
+            <div className="mt-6 duo-card p-3">
+              {branches.map((b, i) => (
+                <div key={b.c} className={`flex items-start gap-3 p-3 rounded-xl ${i % 2 === 0 ? "bg-duo-mint2" : "bg-white"}`}>
+                  <span className="mt-0.5 w-9 h-9 rounded-xl bg-duo-green text-white flex items-center justify-center flex-none" style={{ boxShadow: "0 3px 0 0 #46a302" }}>
+                    <Icon name="MapPin" className="w-4 h-4" />
+                  </span>
+                  <div>
+                    <div className="text-duo-forest font-black">{b.c}</div>
+                    <div className="text-duo-ink2 text-xs font-bold" dangerouslySetInnerHTML={{ __html: b.d }} />
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+/* ---------- CTA donate / join ---------- */
+function DonateCTA() {
+  const ref = useReveal();
+  return (
+    <section id="join" className="relative bg-white py-20 sm:py-28 px-4 sm:px-6 md:px-8">
+      <div ref={ref} className="reveal max-w-7xl mx-auto grid md:grid-cols-2 gap-6">
+        <div id="donate" className="relative rounded-3xl bg-duo-yellow border-2 border-duo-yellow p-8 sm:p-10 overflow-hidden" style={{ boxShadow: "0 6px 0 0 #D5A500" }}>
+          <div className="absolute -right-10 -top-10 w-48 h-48 rounded-full bg-white/30 blur-2xl" />
+          <div className="relative">
+            <div className="chip mb-5" style={{ background: "#fff", borderColor: "#fff", color: "#8a6900", boxShadow: "0 2px 0 0 rgba(0,0,0,0.1)" }}>
+              <Icon name="HeartHandshake" className="w-3 h-3" /> Donate
+            </div>
+            <h3 className="text-duo-ink text-3xl sm:text-4xl font-black leading-tight" style={{ letterSpacing: "-0.02em" }}>
+              Fund a picker&rsquo;s first month of PPE.
+            </h3>
+            <p className="mt-4 text-duo-ink/85 font-semibold max-w-md">
+              A single donation covers gloves, boots, a vest and a health
+              check-up for one new member &mdash; about $40 USD.
+            </p>
+            <div className="mt-6 flex flex-wrap gap-3">
+              <a href="#" className="duo-btn dark">Donate now <Icon name="ArrowRight" className="w-4 h-4" /></a>
+              <a href="#" className="duo-btn ghost" style={{ background: "#fff" }}>Sponsor a branch</a>
+            </div>
+          </div>
+        </div>
+
+        <div className="relative rounded-3xl bg-duo-green border-2 border-duo-green p-8 sm:p-10 overflow-hidden" style={{ boxShadow: "0 6px 0 0 #46a302" }}>
+          <div className="absolute -right-10 -top-10 w-48 h-48 rounded-full bg-white/20 blur-2xl" />
+          <div className="absolute -left-6 -bottom-6 w-40 h-40 rounded-full border-4 border-dashed border-white/30 spin-slow" />
+          <div className="relative">
+            <div className="chip mb-5" style={{ background: "rgba(255,255,255,0.2)", borderColor: "rgba(255,255,255,0.3)", color: "#fff", boxShadow: "0 2px 0 0 rgba(0,0,0,0.15)" }}>
+              <Icon name="Sparkles" className="w-3 h-3" /> Become a member
+            </div>
+            <h3 className="text-white text-3xl sm:text-4xl font-black leading-tight" style={{ letterSpacing: "-0.02em" }}>
+              Join 1,000+ Tanzanians building the circular economy.
+            </h3>
+            <p className="mt-4 text-white/85 font-semibold max-w-md">
+              Whether you&rsquo;re a picker, a collector, an NGO or a recycler &mdash;
+              there&rsquo;s a membership tier for you. Sign up takes under 5 minutes.
+            </p>
+            <div className="mt-6 flex flex-wrap gap-3">
+              <a href="#contact" className="duo-btn" style={{ background: "#fff", color: "#2f6b00", borderColor: "#fff", boxShadow: "0 4px 0 0 rgba(255,255,255,0.4)" }}>Apply to join <Icon name="ArrowRight" className="w-4 h-4" /></a>
+              <a href="#contact" className="duo-btn dark">Talk to us</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+/* ---------- Contact / Footer ---------- */
+function Footer() {
+  return (
+    <footer id="contact" className="relative bg-duo-forest text-white pt-20 pb-10 px-4 sm:px-6 md:px-8 overflow-hidden">
+      <div className="absolute inset-0 opacity-25" style={{
+        backgroundImage: "radial-gradient(circle at 1.2px 1.2px, rgba(215,255,184,0.4) 1.2px, transparent 1.4px)",
+        backgroundSize: "26px 26px"
+      }} />
+      <div className="absolute -top-32 right-0 w-[400px] h-[400px] rounded-full pulse-glow"
+        style={{ background: "radial-gradient(circle, rgba(88,204,2,0.35), transparent 60%)", filter: "blur(50px)" }} />
+
+      <div className="relative max-w-7xl mx-auto">
+        {/* Contact */}
+        <div className="grid lg:grid-cols-12 gap-10 pb-14 border-b border-white/10">
+          <div className="lg:col-span-5">
+            <a href="#" className="flex items-center gap-2.5">
+              <span className="flex items-center justify-center w-12 h-12 rounded-2xl bg-duo-green text-white" style={{ boxShadow: "0 3px 0 0 #46a302" }}>
+                <Icon name="Recycle" className="w-5 h-5" strokeWidth={2.4} />
+              </span>
+              <div>
+                <div className="text-xl font-black">TERECSO</div>
+                <div className="text-[10px] uppercase tracking-[0.18em] font-bold text-duo-mint">Cooperative Society &middot; Since 2011</div>
+              </div>
+            </a>
+            <p className="mt-6 text-white/70 leading-relaxed font-medium max-w-md">
+              The Environmental Conservation and Recycling Cooperative Society
+              Organization &mdash; uniting Tanzania&rsquo;s recyclers, pickers and
+              communities for a circular future.
+            </p>
+            <div className="mt-7 flex items-center gap-3">
+              {["Facebook", "Instagram", "Linkedin", "Twitter"].map(s => (
+                <a key={s} href="#" className="w-11 h-11 rounded-2xl bg-white/10 border-2 border-white/15 flex items-center justify-center text-white/80 hover:text-white hover:bg-white/15 transition-colors" style={{ boxShadow: "0 3px 0 0 rgba(255,255,255,0.08)" }}>
+                  <Icon name={s} className="w-4 h-4" />
+                </a>
+              ))}
+            </div>
+          </div>
+
+          <div className="lg:col-span-7 grid grid-cols-1 sm:grid-cols-2 gap-6">
+            <div className="duo-card bg-white/[0.05] border-white/15 p-6" style={{ boxShadow: "0 4px 0 0 rgba(255,255,255,0.08)" }}>
+              <div className="chip mb-4" style={{ background: "rgba(215,255,184,0.15)", borderColor: "rgba(215,255,184,0.3)", color: "#D7FFB8" }}>
+                <Icon name="MapPin" className="w-3 h-3" /> Head office
+              </div>
+              <div className="text-white font-black text-xl mb-2">Machinga Complex, Ubungo</div>
+              <div className="text-white/75 font-medium leading-relaxed">
+                Morogoro Road, Ubungo District<br/>
+                Dar es Salaam, Tanzania
+              </div>
+              <div className="mt-5 space-y-2.5 text-sm">
+                <div className="flex items-center gap-3 text-white/85 font-bold">
+                  <Icon name="Phone" className="w-4 h-4 text-duo-mint" />+255 22 246 1100
+                </div>
+                <div className="flex items-center gap-3 text-white/85 font-bold">
+                  <Icon name="Mail" className="w-4 h-4 text-duo-mint" />hello@terecso.or.tz
+                </div>
+              </div>
+            </div>
+
+            <div className="duo-card bg-white/[0.05] border-white/15 p-6" style={{ boxShadow: "0 4px 0 0 rgba(255,255,255,0.08)" }}>
+              <div className="chip mb-4" style={{ background: "rgba(215,255,184,0.15)", borderColor: "rgba(215,255,184,0.3)", color: "#D7FFB8" }}>
+                <Icon name="Mail" className="w-3 h-3" /> Stay in the loop
+              </div>
+              <div className="text-white font-black text-xl mb-2">Get monthly impact updates.</div>
+              <p className="text-white/75 font-medium text-sm">No spam &mdash; just collection numbers, member stories and event invites.</p>
+              <form onSubmit={(e) => e.preventDefault()} className="mt-5 flex flex-col gap-3">
+                <input type="email" placeholder="you@example.com" className="bg-white/10 border-2 border-white/15 rounded-xl px-4 py-3 text-sm font-bold placeholder-white/50 text-white focus:outline-none focus:border-duo-mint" />
+                <button className="duo-btn">Subscribe</button>
+              </form>
+            </div>
+          </div>
+        </div>
+
+        {/* footer nav */}
+        <div className="pt-10 pb-8 grid grid-cols-2 sm:grid-cols-4 gap-6 text-sm">
+          {[
+            { h: "About",     l: ["Our story", "Leadership", "Reports", "Press"] },
+            { h: "Members",   l: ["Pickers", "Collectors", "Recyclers", "NGOs"] },
+            { h: "Programs",  l: ["Education", "Marketplace", "Investment fund", "Training"] },
+            { h: "Support",   l: ["Donate", "Partner with us", "Careers", "Contact"] },
+          ].map(col => (
+            <div key={col.h}>
+              <div className="text-duo-mint text-xs font-extrabold uppercase tracking-[0.18em] mb-4">{col.h}</div>
+              <ul className="space-y-2.5">
+                {col.l.map(l => (
+                  <li key={l}><a href="#" className="text-white/75 font-bold hover:text-white transition-colors">{l}</a></li>
+                ))}
+              </ul>
+            </div>
+          ))}
+        </div>
+
+        <div className="pt-8 border-t border-white/10 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 text-xs text-white/55 font-bold">
+          <div>© 2026 TERECSO Cooperative Society Ltd. Registered in Tanzania, est. 2011.</div>
+          <div className="flex items-center gap-6">
+            <a href="#" className="hover:text-white transition-colors">Privacy</a>
+            <a href="#" className="hover:text-white transition-colors">Terms</a>
+            <a href="#" className="hover:text-white transition-colors">Cookies</a>
+          </div>
+        </div>
+      </div>
+    </footer>
+  );
+}
+
+/* ---------- App ---------- */
+function App() {
+  return (
+    <main>
+      <Hero />
+      <Marquee />
+      <About />
+      <Members />
+      <HowItWorks />
+      <Services />
+      <Impact />
+      <AppPreview />
+      <Marketplace />
+      <Challenges />
+      <Branches />
+      <DonateCTA />
+      <Footer />
+    </main>
+  );
+}
+
+ReactDOM.createRoot(document.getElementById("root")).render(<App />);
+
+// Auto-print after React mounts, fonts loaded, and a brief settle delay.
+(async () => {
+  try {
+    if (document.fonts && document.fonts.ready) {
+      await document.fonts.ready;
+    }
+  } catch (e) {}
+  // Wait until React has mounted some content
+  await new Promise((res) => {
+    const start = Date.now();
+    const check = () => {
+      const root = document.getElementById("root");
+      if (root && root.childElementCount > 0) return res();
+      if (Date.now() - start > 5000) return res();
+      requestAnimationFrame(check);
+    };
+    check();
+  });
+  // Force the leaf-bg fallback to show on the hero (video may not load before print)
+  document.querySelectorAll("section video, section canvas").forEach(el => el.style.display = "none");
+  document.querySelectorAll("section .leaf-bg").forEach(el => { el.classList.remove("hidden"); el.style.display = "block"; });
+  // Extra settle delay to be safe
+  await new Promise(r => setTimeout(r, 700));
+  window.print();
+})();
+</script>
+</body>
+</html>
